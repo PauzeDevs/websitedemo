@@ -637,3 +637,33 @@ body { background: var(--paper); color: var(--ink); }
 .hero .eyebrow, .menu-source-link:hover { color: var(--facade-deep); }
 .hero .eyebrow-line { background: var(--facade-deep); }
 .hero h1 em { color: var(--facade-deep); }
+
+
+/* Fix tall hero photo on mobile: give the absolutely positioned frame a definite height. */
+.hero-visual {
+  height: clamp(320px, 42vw, 480px);
+  min-height: 0;
+}
+.hero-image-frame { height: 100%; }
+.hero-image { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+@media (max-width: 760px) {
+  .hero-visual {
+    height: clamp(280px, 78vw, 410px);
+    min-height: 0;
+  }
+  .hero-image-frame { inset: 0 7%; height: 100%; }
+}
+@media (max-width: 480px) {
+  .hero-visual {
+    height: clamp(260px, 82vw, 350px);
+    min-height: 0;
+  }
+  .hero-image-frame { inset: 0 5%; }
+  .round-stamp { width: 88px; border-width: 4px; bottom: 16px; }
+}
+@media (max-width: 350px) {
+  .hero-visual { height: 250px; }
+}
+
+/* Delivery platform links were removed because Chihiro's outlet URLs are unverified. */
+.delivery-links, .delivery-link { display: none !important; }
