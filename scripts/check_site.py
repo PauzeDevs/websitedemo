@@ -113,8 +113,10 @@ def main():
     missing_filters = sorted(set(parser.menu_categories) - set(parser.menu_filters))
     if missing_filters:
         errors.append("Menu categories have no matching filter: " + ", ".join(missing_filters))
-    if len(parser.menu_categories) != len(set(parser.menu_categories)) and len(parser.menu_categories) < 1:
-        errors.append("Menu category data is invalid.")
+    allowed_categories = {"drinks", "desserts", "savoury"}
+    invalid_categories = sorted(set(parser.menu_categories) - allowed_categories)
+    if invalid_categories:
+        errors.append("Unknown menu category value(s): " + ", ".join(invalid_categories))
 
     required_files = (
         ROOT / "assets" / "css" / "styles.css",
