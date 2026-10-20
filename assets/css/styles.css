@@ -667,3 +667,35 @@ body { background: var(--paper); color: var(--ink); }
 
 /* Delivery platform links were removed because Chihiro's outlet URLs are unverified. */
 .delivery-links, .delivery-link { display: none !important; }
+
+
+/* Mobile fix: prevent the story/bread photo from dominating the entire screen. */
+.story-visual {
+  width: 100%;
+  max-width: 540px;
+  min-width: 0;
+}
+.story-visual img {
+  display: block;
+  width: 100%;
+  height: clamp(220px, 58vw, 390px);
+  max-height: 390px;
+  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: center;
+}
+@media (max-width: 760px) {
+  .story-visual { max-width: none; }
+  .story-visual img {
+    height: clamp(210px, 62vw, 320px);
+    max-height: 320px;
+    aspect-ratio: auto;
+  }
+}
+@media (max-width: 480px) {
+  .story-visual img {
+    height: 235px;
+    max-height: 235px;
+    aspect-ratio: auto;
+  }
+}
