@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f1e8">
+  <meta name="theme-color" content="#0b1510">
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="An independent website concept for Chihiro Bakehouse in Lucknow, created by PauzeDevs.">
   <meta property="og:type" content="website">
@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
   <script src="assets/js/main.js" defer></script>
 </head>
@@ -55,7 +55,7 @@
         <h1 id="hero-title">Slow mornings.<br><em>Sweet little</em><br>moments.</h1>
         <p class="hero-description">Coffee worth lingering over, something lovely from the oven, and a corner of the day that belongs just to you.</p>
         <div class="hero-actions">
-          <a class="button button-dark" href="#menu">Explore the menu <span aria-hidden="true">↘</span></a>
+          <a class="button button-dark" href="#menu">Explore menu <span aria-hidden="true">↘</span></a>
           <a class="quiet-link" href="#story">A little about us</a>
         </div>
         <p class="handwritten-note">Make room for a small, lovely pause.</p>
@@ -96,28 +96,73 @@
 
     <section class="menu-section section-wrap" id="menu" aria-labelledby="menu-title">
       <div class="section-heading">
-        <div><p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>A few things to love</p><h2 id="menu-title">Fresh from the <em>counter.</em></h2></div>
-        <p class="section-intro">A sample layout for featured drinks and bakes. Replace these concepts with Chihiro's confirmed menu before launch.</p>
+        <div>
+          <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span> A few things to love</p>
+          <h2 id="menu-title">A taste of <em>Chihiro.</em></h2>
+        </div>
+        <p class="section-intro">Coffee, thoughtful brunch plates and the desserts people come back for. Explore a selection of publicly reported menu highlights.</p>
       </div>
 
-      <div class="menu-grid">
-        <article class="menu-card">
-          <div class="menu-image"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=85" alt="Illustrative photograph of iced coffee" width="900" height="1000" loading="lazy" decoding="async"></div>
-          <div class="menu-meta"><h3>Cloud Nine Latte</h3><span>Sample item</span></div>
-          <p>Silky espresso, chilled milk, and a slow-sipping kind of afternoon.</p>
+      <div class="menu-toolbar">
+        <div class="menu-filters" role="group" aria-label="Filter menu highlights">
+          <button class="menu-filter is-active" type="button" data-filter="all" aria-pressed="true">Everything <span>09</span></button>
+          <button class="menu-filter" type="button" data-filter="drinks" aria-pressed="false">Coffee & tea</button>
+          <button class="menu-filter" type="button" data-filter="desserts" aria-pressed="false">Desserts</button>
+          <button class="menu-filter" type="button" data-filter="brunch" aria-pressed="false">Brunch</button>
+        </div>
+        <a class="menu-source-link" href="https://www.google.com/maps/search/?api=1&query=Chihiro%20Bakehouse%2C%203%20Mahatma%20Gandhi%20Marg%2C%20Lucknow%20226002" target="_blank" rel="noopener noreferrer">Menu & photos on Google Maps <span aria-hidden="true">↗</span></a>
+      </div>
+      <p class="menu-source-note" id="menu-source-note">Highlights reported in public coverage; not a live menu feed. Prices and daily availability were not verifiable, so they are intentionally omitted. Check with Chihiro before ordering.</p>
+      <p class="visually-hidden" id="menu-filter-status" aria-live="polite" aria-atomic="true"></p>
+
+      <div class="menu-grid" id="menu-grid">
+        <article class="menu-card" data-category="drinks">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85" alt="Pour-over coffee being prepared" width="900" height="1000" loading="lazy" decoding="async"></div>
+          <div class="menu-meta"><h3>Espresso & pour-over</h3><span>Specialty coffee</span></div>
+          <p>Chihiro's coffee offering includes espresso and pour-over brews, alongside other coffee styles.</p>
         </article>
-        <article class="menu-card">
-          <div class="menu-image"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=85" alt="Illustrative photograph of golden croissants" width="900" height="1000" loading="lazy" decoding="async"></div>
-          <div class="menu-meta"><h3>Butter Croissant</h3><span>Sample item</span></div>
-          <p>Golden, delicate layers made for breaking apart and sharing.</p>
+        <article class="menu-card" data-category="drinks">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=85" alt="Iced coffee served in a glass" width="900" height="1000" loading="lazy" decoding="async"></div>
+          <div class="menu-meta"><h3>Iced coffee</h3><span>Cold & refreshing</span></div>
+          <p>For a chilled coffee break on a warm Lucknow afternoon.</p>
         </article>
-        <article class="menu-card">
-          <div class="menu-image"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85" alt="Illustrative photograph of a layered chocolate cake" width="900" height="1000" loading="lazy" decoding="async"></div>
-          <div class="menu-meta"><h3>Chocolate Daydream</h3><span>Sample item</span></div>
-          <p>A little indulgence for the days that call for something sweet.</p>
+        <article class="menu-card" data-category="drinks">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=900&q=85" alt="A green matcha drink" width="900" height="1000" loading="lazy" decoding="async"></div>
+          <div class="menu-meta"><h3>Tea & matcha</h3><span>Beyond coffee</span></div>
+          <p>Tea and matcha are also mentioned among the café's drink offerings.</p>
+        </article>
+        <article class="menu-card" data-category="desserts">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=85" alt="Fruit tart and cream dessert inspiration" width="900" height="1000" loading="lazy" decoding="async"></div>
+          <div class="menu-meta"><h3>Berry tart</h3><span>Bakery highlight</span></div>
+          <p>A fruit-forward tart highlighted in coverage of Chihiro's dessert counter.</p>
+        </article>
+        <article class="menu-card" data-category="desserts">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1509456592530-8c7b8e6d4a71?auto=format&fit=crop&w=900&q=85" alt="A slice of spiced cake" width="900" height="1000" loading="lazy" decoding="async"></div>
+          <div class="menu-meta"><h3>Spiced carrot cake</h3><span>Bakery highlight</span></div>
+          <p>A warmly spiced cake called out as one of the café's signature dessert options.</p>
+        </article>
+        <article class="menu-card" data-category="desserts">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85" alt="A layered cake dessert" width="900" height="1000" loading="lazy" decoding="async"></div>
+          <div class="menu-meta"><h3>Smoky pineapple upside-down cake</h3><span>Bakery highlight</span></div>
+          <p>A distinctive pineapple cake mentioned in published coverage of Chihiro.</p>
+        </article>
+        <article class="menu-card" data-category="desserts">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1551024506-0 outline?auto=format&fit=crop&w=900&q=85" alt="Dessert inspiration" width="900" height="1000" loading="lazy" decoding="async"></div>
+          <div class="menu-meta"><h3>Banoffee tart</h3><span>Bakery highlight</span></div>
+          <p>A rich banana-and-toffee-style tart among the desserts described in local coverage.</p>
+        </article>
+        <article class="menu-card" data-category="desserts">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=900&q=85" alt="Waffles served with toppings" width="900" height="1000" loading="lazy" decoding="async"></div>
+          <div class="menu-meta"><h3>Waffles</h3><span>Guest favourite</span></div>
+          <p>Waffles are another recurring feature in the café's public social coverage.</p>
+        </article>
+        <article class="menu-card" data-category="brunch">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=900&q=85" alt="A brunch plate with toast and fresh ingredients" width="900" height="1000" loading="lazy" decoding="async"></div>
+          <div class="menu-meta"><h3>Sandwiches & brunch plates</h3><span>Savoury menu</span></div>
+          <p>Public coverage describes hearty sandwiches and brunch plates among the savoury offerings.</p>
         </article>
       </div>
-      <p class="demo-notice"><span aria-hidden="true">✳</span> Demo menu: items, descriptions and images are illustrative, not an official café menu.</p>
+      <p class="menu-disclaimer">Menu highlights only · recipes, exact names, prices, ingredients and availability need to be confirmed with the café. Images are illustrative and are not photographs of Chihiro's actual dishes.</p>
     </section>
 
     <section class="quote-band" aria-label="A note about taking a moment">
@@ -145,11 +190,11 @@
           <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>When you're nearby</p>
           <h2 id="visit-title">Your next little<br><em>pause awaits.</em></h2>
           <p>Drop in for a coffee, meet a friend, or make an ordinary day feel a little special.</p>
-          <a class="button button-light" href="https://www.instagram.com/chihiro.india/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+          <div class="visit-actions"><a class="button button-light" href="https://www.google.com/maps/search/?api=1&query=Chihiro%20Bakehouse%2C%203%20Mahatma%20Gandhi%20Marg%2C%20Lucknow%20226002" target="_blank" rel="noopener noreferrer">Get directions <span aria-hidden="true">↗</span></a><a class="visit-instagram" href="https://www.instagram.com/chihiro.india/" target="_blank" rel="noopener noreferrer">Follow on Instagram ↗</a></div>
         </div>
         <div class="visit-details">
-          <div class="visit-detail"><h3>Find us</h3><p>Chihiro Bakehouse<br>Lucknow, Uttar Pradesh<br><span class="detail-note">Exact address to be confirmed with the café.</span></p></div>
-          <div class="visit-detail"><h3>Opening hours</h3><p>To be confirmed with the café before publication.</p></div>
+          <div class="visit-detail"><h3>Find us</h3><p>3, Mahatma Gandhi Marg<br>Sadar Bazaar, Cantonment<br>Lucknow, Uttar Pradesh 226002</p></div>
+          <div class="visit-detail"><h3>Opening hours</h3><p>Check today’s hours on Google Maps; listings may change.</p></div>
           <div class="visit-detail"><h3>Say hello</h3><p>Official contact details can be added here after approval.</p></div>
         </div>
       </div>
