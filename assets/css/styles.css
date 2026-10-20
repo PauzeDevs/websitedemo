@@ -209,3 +209,34 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--focus); outline
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* Smooth reveal motion when content enters the viewport. */
+.has-scroll-reveal .scroll-reveal {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 640ms cubic-bezier(.22, 1, .36, 1),
+    transform 640ms cubic-bezier(.22, 1, .36, 1);
+  transition-delay: var(--scroll-reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.has-scroll-reveal .scroll-reveal[data-reveal-direction="left"] {
+  transform: translate3d(-22px, 0, 0);
+}
+.has-scroll-reveal .scroll-reveal[data-reveal-direction="right"] {
+  transform: translate3d(22px, 0, 0);
+}
+.has-scroll-reveal .scroll-reveal.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .has-scroll-reveal .scroll-reveal,
+  .has-scroll-reveal .scroll-reveal[data-reveal-direction="left"],
+  .has-scroll-reveal .scroll-reveal[data-reveal-direction="right"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}
