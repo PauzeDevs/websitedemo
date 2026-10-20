@@ -52,13 +52,9 @@
   }
 })();
 
-/* Scroll reveals: progressive enhancement only; layout and content stay unchanged. */
+/* Forced scroll reveals: use viewport checks even when IntersectionObserver is unavailable. */
 (() => {
   "use strict";
-
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduceMotion) return;
-  if (!("IntersectionObserver" in window)) return;
 
   const revealSelector = [
     ".hero-copy",
@@ -96,16 +92,45 @@
     }
   });
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-revealed");
-      observer.unobserve(entry.target);
-    });
-  }, {
-    threshold: 0.08,
-    rootMargin: "0px 0px -36px 0px"
-  });
+  const revealIfVisible = (element) => {
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.94 && rect.bottom > 0) {
+      element.classList.add("is-revealed");
+      return true;
+    }
+    return false;
+  };
 
-  targets.forEach((element) => observer.observe(element));
+  // Reveal visible content immediately so the page never starts with hidden sections.
+  targets.forEach(revealIfVisible);
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-revealed");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0, rootMargin: "0px 0px 40px 0px" });
+
+    targets.forEach((element) => {
+      if (!element.classList.contains("is-revealed")) observer.observe(element);
+    });
+  } else {
+    let ticking = false;
+    const checkVisible = () => {
+      targets.forEach((element) => {
+        if (!element.classList.contains("is-revealed")) revealIfVisible(element);
+      });
+      ticking = false;
+    };
+    const requestCheck = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(checkVisible);
+    };
+    window.addEventListener("scroll", requestCheck, { passive: true });
+    window.addEventListener("resize", requestCheck);
+    requestCheck();
+  }
 })();
