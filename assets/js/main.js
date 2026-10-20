@@ -51,3 +51,60 @@
     desktopQuery.addListener(handleBreakpointChange);
   }
 })();
+
+/* Scroll reveals: progressive enhancement only; layout and content stay unchanged. */
+(() => {
+  "use strict";
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion || !("IntersectionObserver" in window)) return;
+
+  const revealSelector = [
+    ".hero-copy",
+    ".hero-visual",
+    ".story-visual",
+    ".story-copy",
+    ".section-heading",
+    ".menu-sheet",
+    ".quote-band blockquote",
+    ".gallery-item",
+    ".visit-copy",
+    ".visit-detail",
+    ".site-footer .wordmark",
+    ".site-footer .footer-links",
+    ".copyright"
+  ].join(", ");
+
+  const targets = Array.from(document.querySelectorAll(revealSelector));
+  if (!targets.length) return;
+
+  document.documentElement.classList.add("has-scroll-reveal");
+  const siblingIndexes = new Map();
+
+  targets.forEach((element) => {
+    element.classList.add("scroll-reveal");
+
+    const siblings = siblingIndexes.get(element.parentElement) || 0;
+    element.style.setProperty("--scroll-reveal-delay", `${Math.min(siblings, 4) * 70}ms`);
+    siblingIndexes.set(element.parentElement, siblings + 1);
+
+    if (element.matches(".hero-copy, .story-visual, .visit-copy")) {
+      element.dataset.revealDirection = "left";
+    } else if (element.matches(".hero-visual, .story-copy")) {
+      element.dataset.revealDirection = "right";
+    }
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-revealed");
+      observer.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: "0px 0px -36px 0px"
+  });
+
+  targets.forEach((element) => observer.observe(element));
+})();
