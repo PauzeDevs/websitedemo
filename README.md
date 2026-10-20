@@ -1,40 +1,64 @@
 # Chihiro Bakehouse — Website Concept
 
-An unofficial, responsive one-page website concept for pitching a possible website to Chihiro Bakehouse in Lucknow. Built as a lightweight static site for GitHub Pages.
+A polished, responsive static website concept by **PauzeDevs**, prepared as a proposal for Chihiro Bakehouse in Lucknow.
+
+> **Important:** This is an unofficial demo, not the café's official website. It must not imply endorsement. The content, branding, photography, address, hours, and social details need confirmation and approval before the site is used as a business website.
 
 ## Preview
 
-After enabling GitHub Pages, the project site should be available at:
+Expected GitHub Pages URL after Pages is configured and the workflow succeeds:
 
 https://pauzedevs.github.io/websitedemo/
 
-If it is not live yet, open **Settings → Pages**, select **Deploy from a branch**, choose `main` and `/(root)`, then save. Wait for the Pages deployment to finish.
+The workflow is in `.github/workflows/deploy.yml`. To enable deployment for the first time:
 
-## Features
+1. Open this repository on GitHub and select **Settings → Pages**.
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+3. Open **Actions** and inspect the **Validate and deploy static site** workflow.
+4. After both validation and deployment succeed, open the Pages URL above.
 
-- Editorial café-inspired design with warm ivory, sage, and espresso tones
-- Responsive navigation with a mobile menu
-- Hero, story, sample menu, gallery, and visit sections
-- Subtle scroll-reveal effects with reduced-motion support
-- Accessible navigation labels, image descriptions, and keyboard-focusable links
-- Single-file static HTML; no build step or package installation required
+The site is a plain static HTML/CSS/JavaScript project; no package installation or build framework is required.
 
-## Before showing or publishing publicly
+## Project structure
 
-This is an **unofficial demo** and is not affiliated with or endorsed by Chihiro Bakehouse. It must not be represented as the café's official website.
+- `index.html` — semantic page content, metadata, sections, and accessible labels.
+- `assets/css/styles.css` — design tokens, typography, responsive layout, focus styles, and reduced-motion handling.
+- `assets/js/main.js` — mobile navigation behavior and current-year footer.
+- `assets/images/favicon.svg` — lightweight custom concept favicon.
+- `scripts/check_site.py` — dependency-free checks for repeated IDs, broken in-page links, missing local assets, image alt/dimensions, and key accessibility behaviors.
+- `.github/workflows/deploy.yml` — runs validation and deploys the static site to GitHub Pages.
 
-Confirm with the business before public launch:
-- Permission to use its name, branding, and any café-specific imagery
-- Correct address, opening hours, contact details, and official social links
-- Real menu items, descriptions, and prices
-- Rights and licensing for all photography. The current images are illustrative remote Unsplash images; check licensing and suitability before production.
-- Any claims or copy in the story section
+## Design and behavior
 
-No online ordering, payments, reservations, or enquiry form is connected. The Instagram link is included as a demonstration and should be reconfirmed with the business.
+- Editorial café-inspired visual system: warm ivory, sage, espresso, restrained clay accents, and serif display typography.
+- Responsive layouts for desktop, tablet, and small mobile screens.
+- Mobile menu supports expanded-state semantics, Escape to close, outside-click close, and link-selection close.
+- Navigation remains visible on narrow screens if JavaScript is disabled.
+- Skip-to-content link, visible keyboard focus, descriptive image alt text, semantic landmarks, and reduced-motion support.
+- Hero image loads eagerly at high priority; supporting images use lazy loading and asynchronous decoding.
+- Search indexing is disabled for the concept demo.
 
-## Editing
+## Before production
 
-All page markup, styling, and interactions are in `index.html`. Replace illustrative content with approved details and test on mobile and desktop before delivery.
+Obtain the café's approval and replace or verify the following:
+
+1. The business name, visual identity, copy, and permission to use its branding.
+2. Real menu items, descriptions, prices, dietary/allergen notes, and availability.
+3. Exact address, contact methods, hours, and social-profile URL.
+4. All photographs and their usage rights. Current remote Unsplash images are illustrative placeholders and should be licensed/approved for the final site.
+5. The story section and any statements about ingredients, methods, or the café's experience.
+
+Remove the `noindex, nofollow` robots metadata only when the site is authorized and ready to be discoverable. No online ordering, payments, reservations, backend, analytics, or enquiry form is implemented.
+
+## Local validation
+
+With Python 3 installed, run:
+
+```bash
+python scripts/check_site.py
+```
+
+This validates basic site integrity. It does not replace real-browser testing, visual checks on devices, or a full accessibility audit.
 
 ## Credits
 
