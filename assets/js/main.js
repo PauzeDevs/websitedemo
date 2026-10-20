@@ -9,6 +9,42 @@
     yearTarget.textContent = String(new Date().getFullYear());
   }
 
+  const menuFilterButtons = Array.from(document.querySelectorAll(".menu-filter[data-filter]"));
+  const menuCards = Array.from(document.querySelectorAll(".menu-card[data-category]"));
+  const filterStatus = document.querySelector("#menu-filter-status");
+  const filterContainer = document.querySelector(".menu-filters");
+
+  if (menuFilterButtons.length > 0 && menuCards.length > 0 && filterContainer) {
+    function applyMenuFilter(filter) {
+      let visibleCount = 0;
+
+      menuCards.forEach((card) => {
+        const shouldShow = filter === "all" || card.dataset.category === filter;
+        card.hidden = !shouldShow;
+        if (shouldShow) visibleCount += 1;
+      });
+
+      menuFilterButtons.forEach((button) => {
+        const isActive = button.dataset.filter === filter;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+      });
+
+      if (filterStatus) {
+        const categoryName = filter === "all"
+          ? "all menu highlights"
+          : menuFilterButtons.find((button) => button.dataset.filter === filter)?.textContent.trim() || filter;
+        filterStatus.textContent = `Showing ${visibleCount} ${categoryName.toLowerCase()}.`;
+      }
+    }
+
+    menuFilterButtons.forEach((button) => {
+      button.addEventListener("click", () => applyMenuFilter(button.dataset.filter || "all"));
+    });
+    filterContainer.hidden = false;
+    applyMenuFilter("all");
+  }
+
   if (!menuButton || !navigation) {
     return;
   }
