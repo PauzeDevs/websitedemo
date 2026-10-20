@@ -455,3 +455,136 @@ h1 em, h2 em { color: var(--sage-dark); font-weight: 400; }
   .menu-filters { gap: 4px; }
   .menu-filter { padding-inline: 9px; }
 }
+
+
+/* Client-specific refinement: Chihiro's soft green exterior + cream, with PauzeX forest accents. */
+:root {
+  --paper: #f5f2e7;
+  --paper-deep: #e4ead8;
+  --ink: #0b1510;
+  --ink-soft: #26382b;
+  --sage: #c7dda9;
+  --sage-dark: #47633d;
+  --clay: #b7d77a;
+  --muted: #596559;
+  --line: rgba(11, 21, 16, .16);
+}
+body { background: var(--paper); color: var(--ink); }
+.site-header { background: rgba(245, 242, 231, .96); }
+.wordmark-symbol { border-color: var(--ink); }
+.nav-cta, .button-dark { background: var(--ink); color: var(--paper); }
+.nav-cta:hover, .button-dark:hover { background: var(--sage-dark); color: #fff; }
+.primary-navigation > a:not(.nav-cta) { color: var(--ink-soft); }
+.primary-navigation > a:not(.nav-cta):hover { color: var(--sage-dark); }
+
+/* The hero uses the same gentle green family seen on the café facade. */
+.hero {
+  background: #c9dca8;
+  color: var(--ink);
+}
+.hero .eyebrow { color: #3c5a34; }
+.hero .eyebrow-line { background: #557447; }
+.hero .hero-description { color: #334a35; }
+.hero h1 em { color: #3b5a31; }
+.hero .quiet-link { color: var(--ink); border-color: #4d6e3f; }
+.hero .quiet-link:hover { color: #405f36; }
+.hero .handwritten-note { color: #40553b; }
+.hero .round-stamp { background: var(--paper); color: var(--ink); }
+.hero .stamp-star { color: var(--sage-dark); }
+.hero .hero-image-frame { border: 1px solid rgba(11, 21, 16, .1); }
+.ticker { background: var(--paper); }
+.ticker-inner { color: var(--ink); }
+.ticker-inner span:nth-child(even) { color: var(--sage-dark); }
+.story { background: #e9eddf; }
+.signature { color: #3f5d35; }
+
+/* Smaller crops keep the menu fast to scan, especially on phones. */
+.hero-visual { min-height: 385px; }
+.story-visual img { aspect-ratio: 1.13 / 1; }
+.menu-image { height: clamp(150px, 16vw, 205px); aspect-ratio: auto; }
+.menu-image img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-grid { grid-template-rows: repeat(2, clamp(145px, 15vw, 190px)); }
+.gallery-item { min-height: 0; }
+
+.section-heading .eyebrow { max-width: 100%; }
+.menu-toolbar { border-color: var(--line); }
+.menu-filter.is-active { background: var(--ink); color: var(--paper); }
+.menu-filter:hover { border-color: rgba(11, 21, 16, .24); }
+.menu-source-link { border-color: var(--sage-dark); color: var(--ink-soft); }
+.menu-source-link:hover { color: var(--sage-dark); }
+.menu-source-note { border-color: var(--sage-dark); }
+.menu-card { min-width: 0; }
+.menu-meta span { color: var(--sage-dark); }
+.menu-disclaimer, .delivery-note { color: var(--muted); }
+
+.visit-section { background: var(--ink); }
+.visit-copy .eyebrow { color: var(--sage); }
+.visit-copy .eyebrow-line { background: var(--clay); }
+.visit-copy h2 em { color: var(--sage); }
+.visit-details { border-color: rgba(245, 242, 231, .24); }
+.visit-detail { border-color: rgba(245, 242, 231, .24); }
+.visit-detail h3 { color: var(--sage); }
+.visit-detail p { color: #e6ebdf; }
+.detail-note { color: #c9d3c1; }
+
+/* Delivery is handled by the existing platforms; this site never takes payments. */
+.visit-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; margin-top: 28px; }
+.delivery-links { display: grid; grid-template-columns: repeat(2, minmax(130px, 1fr)); gap: 10px; width: min(100%, 390px); }
+.delivery-link {
+  display: flex; flex-direction: column; gap: 4px; min-height: 74px; justify-content: center;
+  padding: 13px 15px; border: 1px solid rgba(245, 242, 231, .34); border-radius: 8px;
+  background: rgba(245, 242, 231, .06); color: var(--paper);
+  transition: border-color .2s ease, background .2s ease, transform .2s ease;
+}
+.delivery-link:hover { border-color: var(--sage); background: rgba(199, 221, 169, .11); transform: translateY(-2px); }
+.delivery-link-name { font: 400 23px/1.1 var(--serif); }
+.delivery-link-action { color: var(--sage); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+.delivery-note { max-width: 395px; margin: 0; color: #c6d0c0; font-size: 10px; line-height: 1.8; }
+.visit-action-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.visit-action-row .button-light { margin-top: 0; }
+.visit-instagram { font-size: 10px; color: var(--paper); border-bottom: 1px solid var(--sage); padding-bottom: 4px; }
+.visit-instagram:hover { color: var(--sage); }
+
+.disclaimer {
+  max-width: none;
+  margin: 0;
+  padding: 14px var(--gutter) 24px;
+  background: var(--paper-deep);
+  color: #435140;
+  font-size: 10px;
+}
+.concept-bar { background: var(--ink); color: #f5f2e7; }
+.concept-bar span + span { color: var(--sage); }
+.concept-copy { background: rgba(201, 220, 168, .22); }
+.demo-notice { background: #e9eddf; padding: 12px 14px; border-radius: 6px; }
+.menu-disclaimer { padding: 12px 14px; border-left: 2px solid var(--sage-dark); background: #e9eddf; }
+
+@media (max-width: 920px) {
+  .hero-visual { min-height: 335px; }
+  .menu-image { height: 170px; }
+  .gallery-grid { grid-template-rows: repeat(2, 150px); }
+}
+@media (max-width: 760px) {
+  .hero { background: #c9dca8; }
+  .hero-visual { min-height: 310px; }
+  .story-visual img { aspect-ratio: 1.25 / 1; }
+  .menu-image { height: 155px; }
+  .gallery-grid { grid-template-rows: repeat(2, 130px); }
+}
+@media (max-width: 480px) {
+  .hero-visual { min-height: 275px; }
+  .story-visual img { aspect-ratio: 1.22 / 1; }
+  .menu-image { height: 148px; }
+  .gallery-grid { grid-template-rows: 118px 95px 118px; }
+  .delivery-links { width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .delivery-link { min-height: 70px; padding: 11px; }
+  .delivery-link-name { font-size: 21px; }
+  .visit-action-row { align-items: flex-start; }
+}
+
+/* Visible demo banners remain legible against the light brand palette. */
+.section-heading .eyebrow { color: var(--sage-dark); }
+.hero .eyebrow { letter-spacing: .12em; }
+@media (prefers-reduced-motion: reduce) {
+  .delivery-link, .menu-image img { transition: none; }
+}
