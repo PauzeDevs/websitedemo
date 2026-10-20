@@ -30,13 +30,25 @@ The site is a plain static HTML/CSS/JavaScript project; no package installation 
 
 ## Design and behavior
 
-- Editorial café-inspired visual system: warm ivory, sage, espresso, restrained clay accents, and serif display typography.
+- PauzeX-inspired forest green, cream, soft sage, and a controlled lime accent, paired with Instrument Serif, DM Sans, and DM Mono.
 - Responsive layouts for desktop, tablet, and small mobile screens.
 - Mobile menu supports expanded-state semantics, Escape to close, outside-click close, and link-selection close.
 - Navigation remains visible on narrow screens if JavaScript is disabled.
 - Skip-to-content link, visible keyboard focus, descriptive image alt text, semantic landmarks, and reduced-motion support.
 - Hero image loads eagerly at high priority; supporting images use lazy loading and asynchronous decoding.
 - Search indexing is disabled for the concept demo.
+
+
+## Menu research and accuracy
+
+The public Google Maps search listing is linked from the site for current photos, directions, and business information:
+https://www.google.com/maps/search/?api=1&query=Chihiro%20Bakehouse%2C%203%20Mahatma%20Gandhi%20Marg%2C%20Lucknow%20226002
+
+I could not retrieve a reliable, structured, current menu with prices directly from the Google Maps page, so this demo does **not** invent prices or claim to be the full official menu. The current selection of coffee styles, teas/matcha, berry tart, spiced carrot cake, smoky pineapple upside-down cake, banoffee tart, waffles, sandwiches, and brunch plates is based on published local coverage:
+- Curly Tales, published 16 December 2025: https://curlytales.com/india/food/discover/new-cafe-alert-chihiro-brings-specialty-coffee-and-scratch-made-desserts-to-lucknow-cantonment/
+- Knocksense, café feature: https://www.knocksense.com/lucknow/ks-discovery-from-pour-overs-to-pastries-3-new-lucknow-cafes-youll-love-exploring/
+
+Those are menu highlights, not a guarantee that each item is currently available. Confirm the actual menu and price list directly with Chihiro before launch. Opening-hour listings vary across third-party sources, so the site points visitors to Google Maps for current hours rather than hard-coding a possibly stale schedule.
 
 ## Before production
 
