@@ -34,18 +34,17 @@ The site is a plain static HTML/CSS/JavaScript project; no package installation 
 - Search indexing is disabled for the concept demo.
 
 
-## Menu research and accuracy
+## Menu transcription and accuracy
 
-The site links directly to Chihiro's Google Maps place listing for directions and current business information:
+The Bakehouse and Beverages sections are responsive HTML text transcribed from menu photos supplied for this concept. This keeps item names and prices selectable and readable on phones instead of embedding the menu scans at a tiny size. The transcription includes the prices visible in the supplied photos; the Sourdough Tartines price was not shown clearly and is labelled “Price not shown.” When two coffee prices appear together, the site retains the pair and marks the hot price first in a note.
+
+The menu has not been independently verified with the café. Names, prices, descriptions, serving options, ingredients, allergens and availability must all be checked by Chihiro before any public launch.
+
+The hero uses an exterior image referenced from the [Knocksense Chihiro feature](https://www.knocksense.com/lucknow/ks-discovery-from-pour-overs-to-pastries-3-new-lucknow-cafes-youll-love-exploring/), with a credit beside the image. Other stock café and food photos remain illustrative placeholders and should be replaced with café-approved photographs.
+
+The Google Maps place listing is linked for directions and current business information:
 
 https://www.google.com/maps/search/?api=1&query=Chihiro%20Bakehouse%2C%203%20Mahatma%20Gandhi%20Marg%2C%20Lucknow%20226002&query_place_id=ChIJ3-WMnKT9mzkRPZfLOTZiVbk
-
-I could not retrieve a reliable, structured, up-to-date menu with individual prices from Google Maps. To avoid inventing prices, the showcase deliberately has no prices and labels itself as a set of menu highlights. The selected item names are based on public menu-related listing mentions and published local coverage:
-- Google Maps place listing: linked above; use it to verify the current listing and photos.
-- Curly Tales, published 16 December 2025: https://curlytales.com/india/food/discover/new-cafe-alert-chihiro-brings-specialty-coffee-and-scratch-made-desserts-to-lucknow-cantonment/
-- Knocksense café feature: https://www.knocksense.com/lucknow/ks-discovery-from-pour-overs-to-pastries-3-new-lucknow-cafes-youll-love-exploring/
-
-The current showcase uses six cards: specialty coffee and hearty café food as broad categories described in coverage, plus four specifically named desserts from the Knocksense feature: Berry Tart, Spiced Carrot Cake, Smoky Pineapple Upside Down, and Banoffee Tart. That feature was published on 26 November 2025, so even those items are not guaranteed to be available today. Confirm the exact names, ingredients, prices, and availability directly with Chihiro before launch. Opening hours can vary between listings, so the site points visitors to Google Maps rather than hard-coding an uncertain schedule.
 
 ## Before production
 
@@ -54,7 +53,7 @@ Obtain the café's approval and replace or verify the following:
 1. The business name, visual identity, copy, and permission to use its branding.
 2. Real menu items, descriptions, prices, dietary/allergen notes, and availability.
 3. Exact address, contact methods, hours, and social-profile URL.
-4. All photographs and their usage rights. Current remote Unsplash images are illustrative placeholders and should be licensed/approved for the final site; they are not photos of Chihiro’s actual food or building.
+4. All photographs and their usage rights. The credited hero photo is from published coverage; remaining remote Unsplash images are illustrative placeholders and are not photos of Chihiro’s actual food.
 5. The story section and any statements about ingredients, methods, or the café's experience.
 
 Remove the `noindex, nofollow` robots metadata only when the site is authorized and ready to be discoverable. There is no native cart, checkout, payment processing, reservation system, or enquiry backend. No Swiggy or Zomato links are shown because the café’s outlet listings have not been verified.
