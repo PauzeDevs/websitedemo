@@ -18,6 +18,9 @@ class SiteParser(HTMLParser):
         self.local_assets = []
         self.image_errors = []
         self.robots_meta = None
+        self.menu_filters = []
+        self.menu_categories = []
+        self.external_link_errors = []
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -32,6 +35,20 @@ class SiteParser(HTMLParser):
         href = attrs.get("href", "")
         if tag == "a" and href.startswith("#") and len(href) > 1:
             self.fragment_links.append(href[1:])
+
+        if tag == "button" and attrs.get("data-filter"):
+            self.menu_filters.append(attrs["data-filter"])
+
+        if tag == "article" and "menu-card" in attrs.get("class", "").split():
+            if attrs.get("data-category"):
+                self.menu_categories.append(attrs["data-category"])
+
+        if tag == "a" and attrs.get("target") == "_blank":
+            rel_tokens = set(attrs.get("rel", "").lower().split())
+            if not {"noopener", "noreferrer"}.issubset(rel_tokens):
+                self.external_link_errors.append(
+                    f'External new-tab link must use rel="noopener noreferrer": {attrs.get("href", "[no href]")}'
+                )
 
         if tag == "img":
             if "alt" not in attrs:
@@ -87,6 +104,17 @@ def main():
 
     errors.extend(parser.local_assets)
     errors.extend(parser.image_errors)
+    errors.extend(parser.external_link_errors)
+
+    if not parser.menu_categories:
+        errors.append("No menu cards were found.")
+    if not parser.menu_filters or "all" not in parser.menu_filters:
+        errors.append("Menu filtering must provide an 'all' filter.")
+    missing_filters = sorted(set(parser.menu_categories) - set(parser.menu_filters))
+    if missing_filters:
+        errors.append("Menu categories have no matching filter: " + ", ".join(missing_filters))
+    if len(parser.menu_categories) != len(set(parser.menu_categories)) and len(parser.menu_categories) < 1:
+        errors.append("Menu category data is invalid.")
 
     required_files = (
         ROOT / "assets" / "css" / "styles.css",
@@ -103,6 +131,10 @@ def main():
         errors.append("Stylesheet should respect prefers-reduced-motion.")
     if 'aria-expanded' not in js or 'Escape' not in js:
         errors.append("Mobile navigation should expose its state and support Escape.")
+    if "data-filter" not in js or "aria-pressed" not in js:
+        errors.append("Menu filters must update both visible cards and accessible state.")
+    if "query_place_id=ChIJ3-WMnKT9mzkRPZfLOTZiVbk" not in html:
+        errors.append("Directions should point at the resolved Chihiro Maps place listing.")
     if parser.robots_meta and "noindex" not in parser.robots_meta:
         print("NOTE: robots meta no longer contains noindex; confirm this is intentional before production.")
 
@@ -114,7 +146,7 @@ def main():
 
     print(
         "Site validation passed: unique IDs, in-page links, local assets, "
-        "image alt/dimensions, navigation behavior, and reduced-motion support."
+        "image alt/dimensions, safe external links, menu category controls, navigation behavior, and reduced-motion support."
     )
 
 
