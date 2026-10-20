@@ -6,8 +6,7 @@
   const yearTarget = document.querySelector("#current-year");
 
   if (yearTarget) yearTarget.textContent = String(new Date().getFullYear());
-  if (!menuButton || !navigation) return;
-
+  if (menuButton && navigation) {
   const menuLabel = menuButton.querySelector(".menu-toggle-label");
   const menuIcon = menuButton.querySelector(".menu-toggle-icon");
 
@@ -50,6 +49,7 @@
   } else {
     desktopQuery.addListener(handleBreakpointChange);
   }
+  }
 })();
 
 /* Scroll reveals: progressive enhancement only; layout and content stay unchanged. */
@@ -57,7 +57,8 @@
   "use strict";
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduceMotion || !("IntersectionObserver" in window)) return;
+  if (reduceMotion) return;
+  if (!("IntersectionObserver" in window)) return;
 
   const revealSelector = [
     ".hero-copy",
