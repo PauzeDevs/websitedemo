@@ -57,7 +57,7 @@ Obtain the café's approval and replace or verify the following:
 4. All photographs and their usage rights. Current remote Unsplash images are illustrative placeholders and should be licensed/approved for the final site; they are not photos of Chihiro’s actual food or building.
 5. The story section and any statements about ingredients, methods, or the café's experience.
 
-Remove the `noindex, nofollow` robots metadata only when the site is authorized and ready to be discoverable. There is no native cart, checkout, payment processing, reservation system, or enquiry backend. Swiggy and Zomato buttons are outbound search links only; replace them with the café’s verified direct outlet URLs if available.
+Remove the `noindex, nofollow` robots metadata only when the site is authorized and ready to be discoverable. There is no native cart, checkout, payment processing, reservation system, or enquiry backend. No Swiggy or Zomato links are shown because the café’s outlet listings have not been verified.
 
 ## Local validation
 
