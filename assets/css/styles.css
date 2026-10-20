@@ -588,3 +588,52 @@ body { background: var(--paper); color: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
   .delivery-link, .menu-image img { transition: none; }
 }
+
+
+/* Final mobile-first showcase refinements */
+.menu-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.6vw, 22px); }
+.menu-image { height: clamp(150px, 16vw, 205px); aspect-ratio: auto; }
+.menu-card[hidden] { display: none !important; }
+.menu-meta h3 { overflow-wrap: anywhere; }
+.menu-source-note { max-width: 920px; }
+
+/* Delivery platform buttons are outbound links, not a cart or checkout. */
+.visit-actions { width: 100%; }
+.delivery-links { max-width: 420px; }
+.delivery-note { font-size: 10px; }
+
+/* Two compact cards per row work well on normal phones and small tablets. */
+@media (max-width: 760px) {
+  .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 14px; }
+  .menu-image { height: clamp(128px, 24vw, 165px); }
+  .menu-meta { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+  .menu-meta h3 { font-size: clamp(18px, 3vw, 22px); line-height: 1.24; }
+  .menu-meta span { padding-top: 0; }
+  .menu-card > p { font-size: 11px; line-height: 1.7; }
+  .gallery-grid { grid-template-rows: repeat(2, clamp(115px, 25vw, 175px)); }
+}
+@media (max-width: 480px) {
+  .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 19px 11px; }
+  .menu-image { height: clamp(120px, 34vw, 148px); }
+  .menu-meta h3 { font-size: 17px; line-height: 1.25; }
+  .menu-meta span { font-size: 8px; }
+  .menu-card > p { font-size: 10px; line-height: 1.65; }
+  .menu-source-note { font-size: 10px; }
+  .delivery-links { gap: 8px; }
+}
+@media (max-width: 350px) {
+  .menu-grid { grid-template-columns: 1fr; gap: 21px; }
+  .menu-image { height: 155px; }
+  .menu-meta h3 { font-size: 20px; }
+  .menu-card > p { font-size: 11px; }
+}
+
+/* Use the café's soft green facade as the light accent, with PauzeX forest ink. */
+:root {
+  --facade-green: #c9dca8;
+  --facade-deep: #48633e;
+}
+.hero { background: var(--facade-green); }
+.hero .eyebrow, .menu-source-link:hover { color: var(--facade-deep); }
+.hero .eyebrow-line { background: var(--facade-deep); }
+.hero h1 em { color: var(--facade-deep); }
