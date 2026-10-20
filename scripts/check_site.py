@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Small, dependency-free checks for the Chihiro static site."""
+"""Dependency-free integrity checks for the Chihiro static website concept."""
 
 from collections import Counter
 from html.parser import HTMLParser
@@ -17,46 +17,50 @@ class SiteParser(HTMLParser):
         self.fragment_links = []
         self.local_assets = []
         self.image_errors = []
-        self.robots_meta = None
-        self.menu_filters = []
-        self.menu_categories = []
         self.external_link_errors = []
+        self.robots_meta = None
+        self.theme_color = None
+        self.menu_items = 0
+        self.menu_prices = 0
+        self.ticker_has_role = False
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
-
         element_id = attrs.get("id")
         if element_id:
             self.ids.append(element_id)
 
-        if tag == "meta" and attrs.get("name", "").lower() == "robots":
-            self.robots_meta = attrs.get("content", "").lower()
+        if tag == "meta":
+            name = attrs.get("name", "").lower()
+            if name == "robots":
+                self.robots_meta = attrs.get("content", "").lower()
+            elif name == "theme-color":
+                self.theme_color = attrs.get("content", "").lower()
+
+        if "ticker" in attrs.get("class", "").split() and attrs.get("role") == "note":
+            self.ticker_has_role = True
 
         href = attrs.get("href", "")
         if tag == "a" and href.startswith("#") and len(href) > 1:
             self.fragment_links.append(href[1:])
 
-        if tag == "button" and attrs.get("data-filter"):
-            self.menu_filters.append(attrs["data-filter"])
-
-        if tag == "article" and "menu-card" in attrs.get("class", "").split():
-            if attrs.get("data-category"):
-                self.menu_categories.append(attrs["data-category"])
-
         if tag == "a" and attrs.get("target") == "_blank":
             rel_tokens = set(attrs.get("rel", "").lower().split())
             if not {"noopener", "noreferrer"}.issubset(rel_tokens):
                 self.external_link_errors.append(
-                    f'External new-tab link must use rel="noopener noreferrer": {attrs.get("href", "[no href]")}'
+                    f'External new-tab link must use rel="noopener noreferrer": {href or "[no href]"}'
                 )
 
+        if tag == "h5":
+            self.menu_items += 1
+        if tag == "span" and "menu-price" in attrs.get("class", "").split():
+            self.menu_prices += 1
+
         if tag == "img":
-            if "alt" not in attrs:
-                self.image_errors.append("Image is missing an alt attribute.")
+            if "alt" not in attrs or not attrs.get("alt", "").strip():
+                self.image_errors.append(f"Image is missing meaningful alt text: {attrs.get('src', '[no src]')}")
             if not attrs.get("width") or not attrs.get("height"):
-                self.image_errors.append(
-                    f"Image should declare width and height: {attrs.get('src', '[no src]')}"
-                )
+                self.image_errors.append(f"Image should declare width and height: {attrs.get('src', '[no src]')}")
 
         asset_url = None
         if tag == "img":
@@ -72,9 +76,7 @@ class SiteParser(HTMLParser):
             parsed = urlsplit(asset_url)
             if parsed.scheme in {"http", "https", "data"} or asset_url.startswith("//"):
                 if parsed.scheme == "http":
-                    self.local_assets.append(
-                        f"Insecure HTTP asset URL found: {asset_url}"
-                    )
+                    self.local_assets.append(f"Insecure HTTP asset URL found: {asset_url}")
             else:
                 asset_path = (ROOT / parsed.path).resolve()
                 if ROOT not in asset_path.parents and asset_path != ROOT:
@@ -91,7 +93,6 @@ def main():
     parser = SiteParser()
     parser.feed(html)
     parser.close()
-
     errors = []
 
     duplicates = [item for item, count in Counter(parser.ids).items() if count > 1]
@@ -106,17 +107,16 @@ def main():
     errors.extend(parser.image_errors)
     errors.extend(parser.external_link_errors)
 
-    if not parser.menu_categories:
-        errors.append("No menu cards were found.")
-    if not parser.menu_filters or "all" not in parser.menu_filters:
-        errors.append("Menu filtering must provide an 'all' filter.")
-    missing_filters = sorted(set(parser.menu_categories) - set(parser.menu_filters))
-    if missing_filters:
-        errors.append("Menu categories have no matching filter: " + ", ".join(missing_filters))
-    allowed_categories = {"drinks", "desserts", "savoury"}
-    invalid_categories = sorted(set(parser.menu_categories) - allowed_categories)
-    if invalid_categories:
-        errors.append("Unknown menu category value(s): " + ", ".join(invalid_categories))
+    if parser.theme_color != "#f0f4e9":
+        errors.append("Browser theme-color should match the cream/sage page palette (#f0f4e9).")
+    if not parser.ticker_has_role:
+        errors.append('The labeled ticker should use role="note" for accessible semantics.')
+    if parser.menu_items < 35 or parser.menu_prices < 35:
+        errors.append(
+            f"Menu transcription appears incomplete: found {parser.menu_items} item names and {parser.menu_prices} price labels."
+        )
+    if "noindex" not in (parser.robots_meta or ""):
+        print("NOTE: confirm indexing is appropriate before production launch.")
 
     required_files = (
         ROOT / "assets" / "css" / "styles.css",
@@ -127,28 +127,31 @@ def main():
         if not required.is_file():
             errors.append(f"Required file is missing: {required.relative_to(ROOT)}")
 
-    css = (ROOT / "assets" / "css" / "styles.css").read_text(encoding="utf-8") if (ROOT / "assets" / "css" / "styles.css").is_file() else ""
-    js = (ROOT / "assets" / "js" / "main.js").read_text(encoding="utf-8") if (ROOT / "assets" / "js" / "main.js").is_file() else ""
+    css_path = ROOT / "assets" / "css" / "styles.css"
+    js_path = ROOT / "assets" / "js" / "main.js"
+    css = css_path.read_text(encoding="utf-8") if css_path.is_file() else ""
+    js = js_path.read_text(encoding="utf-8") if js_path.is_file() else ""
     if "prefers-reduced-motion: reduce" not in css:
         errors.append("Stylesheet should respect prefers-reduced-motion.")
-    if 'aria-expanded' not in js or 'Escape' not in js:
+    if "aria-expanded" not in js or "Escape" not in js:
         errors.append("Mobile navigation should expose its state and support Escape.")
-    if "data-filter" not in js or "aria-pressed" not in js:
-        errors.append("Menu filters must update both visible cards and accessible state.")
-    if "query_place_id=ChIJ3-WMnKT9mzkRPZfLOTZiVbk" not in html:
-        errors.append("Directions should point at the resolved Chihiro Maps place listing.")
-    if parser.robots_meta and "noindex" not in parser.robots_meta:
-        print("NOTE: robots meta no longer contains noindex; confirm this is intentional before production.")
+    if 'setAttribute("aria-expanded"' not in js:
+        errors.append("Mobile navigation should update aria-expanded when toggled.")
+    if "ChIJ3-WMnKT9mzkRPZfLOTZiVbk" not in html:
+        errors.append("Directions should point to the configured Chihiro Maps listing.")
+    if "menu-toolbar" in html or "menu-filter" in html:
+        errors.append("Obsolete card-filter markup remains after replacing it with readable menu text.")
 
     if errors:
         print("Site validation failed:")
         for error in errors:
-            print(f" - {error}")
+            print(" - " + error)
         raise SystemExit(1)
 
     print(
-        "Site validation passed: unique IDs, in-page links, local assets, "
-        "image alt/dimensions, safe external links, menu category controls, navigation behavior, and reduced-motion support."
+        f"Site validation passed: unique IDs, in-page links, local assets, image alt/dimensions, "
+        f"safe external links, {parser.menu_items} menu items and {parser.menu_prices} price labels, "
+        "theme color, ticker semantics, navigation behavior, and reduced-motion support."
     )
 
 
