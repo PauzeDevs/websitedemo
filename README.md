@@ -6,16 +6,11 @@ A polished, responsive static website concept by **PauzeDevs**, prepared as a pr
 
 ## Preview
 
-Expected GitHub Pages URL after Pages is configured and the workflow succeeds:
+GitHub Pages URL:
 
 https://pauzedevs.github.io/websitedemo/
 
-The workflow is in `.github/workflows/deploy.yml`. To enable deployment for the first time:
-
-1. Open this repository on GitHub and select **Settings → Pages**.
-2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-3. Open **Actions** and inspect the **Validate and deploy static site** workflow.
-4. After both validation and deployment succeed, open the Pages URL above.
+A validation-only workflow runs from `.github/workflows/validate.yml` on pushes and pull requests. GitHub Pages deployment is handled by the repository's Pages configuration. If the site stops updating, open **Settings → Pages** and check that the source is set to the `main` branch and repository root. Then inspect the **pages build and deployment** workflow in **Actions**.
 
 The site is a plain static HTML/CSS/JavaScript project; no package installation or build framework is required.
 
@@ -26,7 +21,7 @@ The site is a plain static HTML/CSS/JavaScript project; no package installation 
 - `assets/js/main.js` — mobile navigation behavior and current-year footer.
 - `assets/images/favicon.svg` — lightweight custom concept favicon.
 - `scripts/check_site.py` — dependency-free checks for repeated IDs, broken in-page links, missing local assets, image alt/dimensions, and key accessibility behaviors.
-- `.github/workflows/deploy.yml` — runs validation and deploys the static site to GitHub Pages.
+- `.github/workflows/validate.yml` — runs lightweight site-integrity checks on pushes and pull requests; GitHub Pages handles publishing through its configured Pages source.
 
 ## Design and behavior
 
@@ -50,7 +45,7 @@ I could not retrieve a reliable, structured, up-to-date menu with individual pri
 - Curly Tales, published 16 December 2025: https://curlytales.com/india/food/discover/new-cafe-alert-chihiro-brings-specialty-coffee-and-scratch-made-desserts-to-lucknow-cantonment/
 - Knocksense café feature: https://www.knocksense.com/lucknow/ks-discovery-from-pour-overs-to-pastries-3-new-lucknow-cafes-youll-love-exploring/
 
-Items such as Spanish Latte, Iced Americano, Lavender Latte, Smoky Pineapple Upside-Down Cake, Mango Tart, Spiced Carrot Cake, Tiramisu, Banana Bread, and Pesto Sandwich appear in public menu-related mentions or coverage; that does not guarantee they remain available today. Confirm the exact menu, names, prices, ingredients, and availability directly with Chihiro before launch. Opening hours can vary between listings, so the site points visitors to Google Maps rather than hard-coding an uncertain schedule.
+The current showcase uses six cards: specialty coffee and hearty café food as broad categories described in coverage, plus four specifically named desserts from the Knocksense feature: Berry Tart, Spiced Carrot Cake, Smoky Pineapple Upside Down, and Banoffee Tart. That feature was published on 26 November 2025, so even those items are not guaranteed to be available today. Confirm the exact names, ingredients, prices, and availability directly with Chihiro before launch. Opening hours can vary between listings, so the site points visitors to Google Maps rather than hard-coding an uncertain schedule.
 
 ## Before production
 
