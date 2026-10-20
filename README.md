@@ -25,7 +25,7 @@ The site is a plain static HTML/CSS/JavaScript project; no package installation 
 
 ## Design and behavior
 
-- PauzeX-inspired forest green, cream, soft sage, and a controlled lime accent, paired with Instrument Serif, DM Sans, and DM Mono.
+- A cream base, PauzeX-style forest-green typography and accents, and a soft sage-green hero inspired by the café’s soothing green exterior described in the [Knocksense café feature](https://www.knocksense.com/lucknow/ks-discovery-from-pour-overs-to-pastries-3-new-lucknow-cafes-youll-love-exploring/). Typography pairs Instrument Serif with DM Sans and DM Mono.
 - Responsive layouts for desktop, tablet, and small mobile screens.
 - Mobile menu supports expanded-state semantics, Escape to close, outside-click close, and link-selection close.
 - Navigation remains visible on narrow screens if JavaScript is disabled.
@@ -54,10 +54,10 @@ Obtain the café's approval and replace or verify the following:
 1. The business name, visual identity, copy, and permission to use its branding.
 2. Real menu items, descriptions, prices, dietary/allergen notes, and availability.
 3. Exact address, contact methods, hours, and social-profile URL.
-4. All photographs and their usage rights. Current remote Unsplash images are illustrative placeholders and should be licensed/approved for the final site.
+4. All photographs and their usage rights. Current remote Unsplash images are illustrative placeholders and should be licensed/approved for the final site; they are not photos of Chihiro’s actual food or building.
 5. The story section and any statements about ingredients, methods, or the café's experience.
 
-Remove the `noindex, nofollow` robots metadata only when the site is authorized and ready to be discoverable. No online ordering, payments, reservations, backend, analytics, or enquiry form is implemented.
+Remove the `noindex, nofollow` robots metadata only when the site is authorized and ready to be discoverable. There is no native cart, checkout, payment processing, reservation system, or enquiry backend. Swiggy and Zomato buttons are outbound search links only; replace them with the café’s verified direct outlet URLs if available.
 
 ## Local validation
 
