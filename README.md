@@ -41,14 +41,16 @@ The site is a plain static HTML/CSS/JavaScript project; no package installation 
 
 ## Menu research and accuracy
 
-The public Google Maps search listing is linked from the site for current photos, directions, and business information:
-https://www.google.com/maps/search/?api=1&query=Chihiro%20Bakehouse%2C%203%20Mahatma%20Gandhi%20Marg%2C%20Lucknow%20226002
+The site links directly to Chihiro's Google Maps place listing for directions and current business information:
 
-I could not retrieve a reliable, structured, current menu with prices directly from the Google Maps page, so this demo does **not** invent prices or claim to be the full official menu. The current selection of coffee styles, teas/matcha, berry tart, spiced carrot cake, smoky pineapple upside-down cake, banoffee tart, waffles, sandwiches, and brunch plates is based on published local coverage:
+https://www.google.com/maps/search/?api=1&query=Chihiro%20Bakehouse%2C%203%20Mahatma%20Gandhi%20Marg%2C%20Lucknow%20226002&query_place_id=ChIJ3-WMnKT9mzkRPZfLOTZiVbk
+
+I could not retrieve a reliable, structured, up-to-date menu with individual prices from Google Maps. To avoid inventing prices, the showcase deliberately has no prices and labels itself as a set of menu highlights. The selected item names are based on public menu-related listing mentions and published local coverage:
+- Google Maps place listing: linked above; use it to verify the current listing and photos.
 - Curly Tales, published 16 December 2025: https://curlytales.com/india/food/discover/new-cafe-alert-chihiro-brings-specialty-coffee-and-scratch-made-desserts-to-lucknow-cantonment/
-- Knocksense, café feature: https://www.knocksense.com/lucknow/ks-discovery-from-pour-overs-to-pastries-3-new-lucknow-cafes-youll-love-exploring/
+- Knocksense café feature: https://www.knocksense.com/lucknow/ks-discovery-from-pour-overs-to-pastries-3-new-lucknow-cafes-youll-love-exploring/
 
-Those are menu highlights, not a guarantee that each item is currently available. Confirm the actual menu and price list directly with Chihiro before launch. Opening-hour listings vary across third-party sources, so the site points visitors to Google Maps for current hours rather than hard-coding a possibly stale schedule.
+Items such as Spanish Latte, Iced Americano, Lavender Latte, Smoky Pineapple Upside-Down Cake, Mango Tart, Spiced Carrot Cake, Tiramisu, Banana Bread, and Pesto Sandwich appear in public menu-related mentions or coverage; that does not guarantee they remain available today. Confirm the exact menu, names, prices, ingredients, and availability directly with Chihiro before launch. Opening hours can vary between listings, so the site points visitors to Google Maps rather than hard-coding an uncertain schedule.
 
 ## Before production
 
